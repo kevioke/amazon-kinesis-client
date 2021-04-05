@@ -98,14 +98,7 @@ public class KinesisClientLibConfiguratorTest {
     public void testWithInitialPositionInStreamExtended() {
         MultiLangDaemonConfiguration config = getConfiguration(StringUtils.join(new String[] { "applicationName = app",
                 "streamName = 123", "AWSCredentialsProvider = " + credentialName1 + ", " + credentialName2,
-                "workerId = 123", "failoverTimeMillis = 100", "shardSyncIntervalMillis = 500",
                 "initialPositionInStreamExtended = 1617406032" }, '\n'));
-
-        assertEquals(config.getApplicationName(), "app");
-        assertEquals(config.getStreamName(), "123");
-        assertEquals(config.getWorkerIdentifier(), "123");
-        assertEquals(config.getFailoverTimeMillis(), 100);
-        assertEquals(config.getShardSyncIntervalMillis(), 500);
 
         assertEquals(config.getInitialPositionInStreamExtended().getTimestamp(), new Date(1617406032000L));
         assertEquals(config.getInitialPositionInStream(), InitialPositionInStream.AT_TIMESTAMP);
