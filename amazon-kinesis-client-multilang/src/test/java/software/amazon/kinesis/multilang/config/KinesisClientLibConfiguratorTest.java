@@ -121,8 +121,7 @@ public class KinesisClientLibConfiguratorTest {
         assertEquals(config.getApplicationName(), "b");
         assertEquals(config.getStreamName(), "stream");
         assertEquals(config.getWorkerIdentifier(), "id");
-        // by setting the configuration there is no effect on kinesisClientConfiguration
-        // variable.
+        // by setting the configuration there is no effect on kinesisClientConfiguration variable.
     }
 
     @Test
@@ -172,10 +171,9 @@ public class KinesisClientLibConfiguratorTest {
                 "applicationName = b", "AWSCredentialsProvider = ABCD," + credentialName1, "workerId = 1",
                 "metricsEnabledDimensions = ShardId, WorkerIdentifier" }, '\n'));
 
-        Set<String> expectedMetricsEnabledDimensions = ImmutableSet.<String>builder().add("ShardId", "WorkerIdentifier")
-                .build();
-        assertThat(new HashSet<>(Arrays.asList(config.getMetricsEnabledDimensions())),
-                equalTo(expectedMetricsEnabledDimensions));
+        Set<String> expectedMetricsEnabledDimensions = ImmutableSet.<String> builder()
+                .add("ShardId", "WorkerIdentifier").build();
+        assertThat(new HashSet<>(Arrays.asList(config.getMetricsEnabledDimensions())), equalTo(expectedMetricsEnabledDimensions));
     }
 
     @Test
@@ -243,8 +241,7 @@ public class KinesisClientLibConfiguratorTest {
                 "AWSCredentialsProvider = " + credentialName1, "workerId = 123", "failoverTimeMillis = -12" }, '\n');
         InputStream input = new ByteArrayInputStream(test.getBytes());
 
-        // separate input stream with getConfiguration to explicitly catch exception
-        // from the getConfiguration statement
+        // separate input stream with getConfiguration to explicitly catch exception from the getConfiguration statement
         try {
             configurator.getConfiguration(input);
         } catch (Exception e) {
@@ -261,8 +258,7 @@ public class KinesisClientLibConfiguratorTest {
                 "failoverTimeMillis = 100", "shardSyncIntervalMillis = 500" }, '\n');
         InputStream input = new ByteArrayInputStream(test.getBytes());
 
-        // separate input stream with getConfiguration to explicitly catch exception
-        // from the getConfiguration statement
+        // separate input stream with getConfiguration to explicitly catch exception from the getConfiguration statement
         configurator.getConfiguration(input);
     }
 
@@ -275,8 +271,7 @@ public class KinesisClientLibConfiguratorTest {
         InputStream input = new ByteArrayInputStream(test.getBytes());
         MultiLangDaemonConfiguration config = configurator.getConfiguration(input);
 
-        // if workerId is not provided, configurator should assign one for it
-        // automatically
+        // if workerId is not provided, configurator should assign one for it automatically
         assertNotNull(config.getWorkerIdentifier());
         assertFalse(config.getWorkerIdentifier().isEmpty());
     }
@@ -312,8 +307,7 @@ public class KinesisClientLibConfiguratorTest {
                 '\n');
         InputStream input = new ByteArrayInputStream(test.getBytes());
 
-        // separate input stream with getConfiguration to explicitly catch exception
-        // from the getConfiguration statement
+        // separate input stream with getConfiguration to explicitly catch exception from the getConfiguration statement
         try {
             MultiLangDaemonConfiguration config = configurator.getConfiguration(input);
             config.getKinesisCredentialsProvider().build(AwsCredentialsProvider.class).resolveCredentials();
@@ -333,8 +327,7 @@ public class KinesisClientLibConfiguratorTest {
                 "shardSyncIntervalMillis = 500" }, '\n');
         InputStream input = new ByteArrayInputStream(test.getBytes());
 
-        // separate input stream with getConfiguration to explicitly catch exception
-        // from the getConfiguration statement
+        // separate input stream with getConfiguration to explicitly catch exception from the getConfiguration statement
         MultiLangDaemonConfiguration config = configurator.getConfiguration(input);
         try {
             config.getKinesisCredentialsProvider().build(AwsCredentialsProvider.class).resolveCredentials();
@@ -363,11 +356,9 @@ public class KinesisClientLibConfiguratorTest {
                 "shardSyncIntervalMillis = 500" }, '\n');
         InputStream input = new ByteArrayInputStream(test.getBytes());
 
-        // separate input stream with getConfiguration to explicitly catch exception
-        // from the getConfiguration statement
+        // separate input stream with getConfiguration to explicitly catch exception from the getConfiguration statement
 
-        // separate input stream with getConfiguration to explicitly catch exception
-        // from the getConfiguration statement
+        // separate input stream with getConfiguration to explicitly catch exception from the getConfiguration statement
         MultiLangDaemonConfiguration config = configurator.getConfiguration(input);
         try {
             config.getKinesisCredentialsProvider().build(AwsCredentialsProvider.class).resolveCredentials();

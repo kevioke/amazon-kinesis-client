@@ -122,8 +122,7 @@ public class MultiLangDaemonConfiguration {
     @ConfigurationSettable(configurationClass = LeaseManagementConfig.class)
     private int maxListShardsRetryAttempts;
 
-    // Enables applications flush/checkpoint (if they have some data "in progress",
-    // but don't get new data for while)
+    // Enables applications flush/checkpoint (if they have some data "in progress", but don't get new data for while)
     @ConfigurationSettable(configurationClass = ProcessorConfig.class)
     private boolean callProcessRecordsEvenForEmptyRecordList;
 
@@ -158,6 +157,7 @@ public class MultiLangDaemonConfiguration {
         metricsEnabledDimensions = new HashSet<>(Arrays.asList(dimensions));
     }
 
+
     private RetrievalMode retrievalMode = RetrievalMode.DEFAULT;
 
     private final FanoutConfigBean fanoutConfig = new FanoutConfigBean();
@@ -168,6 +168,7 @@ public class MultiLangDaemonConfiguration {
 
     private long shutdownGraceMillis;
     private Integer timeoutInSeconds;
+
 
     private final BuilderDynaBean kinesisCredentialsProvider;
 
@@ -247,8 +248,8 @@ public class MultiLangDaemonConfiguration {
         AWSCredentialsProviderPropertyValueDecoder oldCredentialsDecoder = new AWSCredentialsProviderPropertyValueDecoder();
         Function<String, ?> converter = s -> new V2CredentialWrapper(oldCredentialsDecoder.decodeValue(s));
 
-        this.kinesisCredentialsProvider = new BuilderDynaBean(AwsCredentialsProvider.class, convertUtilsBean, converter,
-                CREDENTIALS_DEFAULT_SEARCH_PATH);
+        this.kinesisCredentialsProvider = new BuilderDynaBean(AwsCredentialsProvider.class, convertUtilsBean,
+                converter, CREDENTIALS_DEFAULT_SEARCH_PATH);
         this.dynamoDBCredentialsProvider = new BuilderDynaBean(AwsCredentialsProvider.class, convertUtilsBean,
                 converter, CREDENTIALS_DEFAULT_SEARCH_PATH);
         this.cloudWatchCredentialsProvider = new BuilderDynaBean(AwsCredentialsProvider.class, convertUtilsBean,
